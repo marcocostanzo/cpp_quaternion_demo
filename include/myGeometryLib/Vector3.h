@@ -17,7 +17,7 @@ namespace vanvitelli
         {
         }
 
-        Vector3(const Vector3<Scalar>& v) = default;
+        Vector3(const Vector3<Scalar> &v) = default;
 
         ~Vector3() = default;
 

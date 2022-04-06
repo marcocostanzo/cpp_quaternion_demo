@@ -37,7 +37,7 @@ namespace vanvitelli
         void checkNormalized() const
         {
             Scalar tmp = Quaternion<Scalar>::squaredNorm() - Scalar(1.0);
-            tmp = tmp*tmp;
+            tmp = tmp * tmp;
             if (tmp > std::numeric_limits<Scalar>::epsilon())
             {
                 throw std::runtime_error("UnitQuaternion not unit!, the squared norm is: " + std::to_string(Quaternion<Scalar>::squaredNorm()));

@@ -43,12 +43,12 @@ namespace vanvitelli
             return w_;
         }
 
-        virtual void setV(const Vector3<Scalar>& v)
+        virtual void setV(const Vector3<Scalar> &v)
         {
             v_ = v;
         }
 
-        virtual void setW(const Scalar& w)
+        virtual void setW(const Scalar &w)
         {
             w_ = w;
         }
