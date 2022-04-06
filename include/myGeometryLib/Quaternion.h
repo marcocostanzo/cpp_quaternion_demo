@@ -6,21 +6,29 @@
 namespace vanvitelli
 {
 
+    // Forward declaration, it is needed in the unit() method
     template <typename Scalar>
     class UnitQuaternion;
 
+    // The Quaternion class
     template <typename Scalar>
     class Quaternion
     {
     protected:
+        // vector part
         Vector3<Scalar> v_;
+        // scalar part
         Scalar w_;
 
     public:
+        // Full constructor
+        // note that we use the initializer list to construct v_
         Quaternion(const Scalar &x, const Scalar &y, const Scalar &z, const Scalar &w) : v_(x, y, z),
                                                                                          w_(w)
         {
         }
+
+        // Constructors...
 
         Quaternion(const Vector3<Scalar> &v, const Scalar &w)
             : v_(v),
@@ -33,6 +41,7 @@ namespace vanvitelli
         {
         }
 
+        // getters
         const Vector3<Scalar> &v() const
         {
             return v_;
@@ -43,6 +52,8 @@ namespace vanvitelli
             return w_;
         }
 
+        // setters. note that they are virtual
+        // we need to modify the setters in the UnitQuaternion class
         virtual void setV(const Vector3<Scalar> &v)
         {
             v_ = v;
@@ -53,6 +64,7 @@ namespace vanvitelli
             w_ = w;
         }
 
+        // a destructor, note "virtual"
         virtual ~Quaternion() = default;
 
         virtual Scalar squaredNorm() const
@@ -65,12 +77,16 @@ namespace vanvitelli
             return std::sqrt(squaredNorm());
         }
 
+        // here we need the forward declaration
+        // this method normalizes the quaternion and returns it as a UnitQuaternion
         virtual UnitQuaternion<Scalar> unit() const
         {
             Scalar norm_ = norm();
             return UnitQuaternion<Scalar>(v_ / norm_, w_ / norm_);
         }
 
+        // this method normalizes *this* quaternion
+        // the quaternion will not be an UnitQuaternion!!
         virtual void normalize()
         {
             Scalar norm_ = norm();
@@ -90,6 +106,8 @@ namespace vanvitelli
             std::cout << "Quaternion: < " << v_.x() << " , " << v_.y() << " , " << v_.z() << " > , " << w_ << "\n";
         }
     };
+
+    // conj e inv are separate functions (this is not mandatory)
 
     template <typename Scalar>
     Quaternion<Scalar> conj(const Quaternion<Scalar> &q)
